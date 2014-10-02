@@ -1,0 +1,82 @@
+<div class="container" ng-controller="Board">
+
+	<div class="row">
+		<div class="col-md-11">
+			<h3>Fintech-Fab dashboard задач стажировки (GitHib)</h3>
+		</div>
+
+		<div class="col-md-6">
+			<h4>Комменты</h4>
+			<table class="table">
+				<tr>
+					<th>pic</th>
+					<th>login</th>
+					<th>issue</th>
+					<th>info</th>
+					<th width="25%">upd</th>
+				</tr>
+				<tr ng-repeat="item in lastComments">
+					<td><img ng-src="{{ item.user.avatar_url }}" class="list-avatar-item"></td>
+					<td><a href="https://github.com/{{item.user_login}}" target="_blank">{{ item.user_login }}</a></td>
+					<td><a href="{{item.html_url}}" target="_blank">#{{ item.issue_number }}</a></td>
+					<td>{{ item.prev }}</td>
+					<td>{{ item.updated | date }}</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="col-md-6">
+			<h4>Задачи</h4>
+			<table class="table">
+				<tr>
+					<th>pic</th>
+					<th>login</th>
+					<th>issue</th>
+					<th>info</th>
+					<th width="25%">dt</th>
+				</tr>
+				<tr ng-repeat="item in lastIssues">
+					<td><img ng-src="{{ item.user.avatar_url }}" class="list-avatar-item"></td>
+					<td><a href="https://github.com/{{item.user_login}}" target="_blank">{{ item.user_login }}</a></td>
+					<td><a href="{{item.html_url}}" target="_blank">#{{ item.number }}</a></td>
+					<td>{{ item.title | limitTo : 20 }}...</td>
+					<td>{{ item.updated | date }}</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-12">
+			<h4>И коммиты</h4>
+			<table class="table">
+				<tr>
+					<th>pic</th>
+					<th>login</th>
+					<th>repo</th>
+					<th>issue</th>
+					<th>info</th>
+					<th>hash</th>
+					<th width="12%">dt</th>
+				</tr>
+				<tr ng-repeat="item in lastCommits">
+					<td><img ng-src="{{ item.user.avatar_url }}" class="list-avatar-item"></td>
+					<td><a href="https://github.com/{{item.actor_login}}" target="_blank">{{ item.actor_login }}</a></td>
+					<td><a href="https://github.com/{{item.repo}}" target="_blank">{{ item.repo }}</a></td>
+					<td><a href="{{item.issue.html_url}}" target="_blank">#{{ item.issue_number }}</a></td>
+					<td>{{ item.message }}</td>
+					<td><a href="https://github.com/{{item.repo}}/commit/{{ item.commit_id }}" target="_blank">{{ item.commit_id | limitTo: 8 }}</a></td>
+					<td>{{ item.created | date }}</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+	<div class="footer row small grey pull-right">
+		Решение задачи сбора данных из GitHub API: <a href="https://github.com/k17-sergey">k17-sergey</a>
+	</div>
+</div>
+
+

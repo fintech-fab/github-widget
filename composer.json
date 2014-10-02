@@ -1,0 +1,27 @@
+{
+    "name": "fintech-fab/github-widget",
+    "description": "",
+    "authors": [
+        {
+            "name": "fintech-fab",
+            "email": "dev@fintech-fab.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "FintechFab\\GithubWidget\\": "src",
+            "FintechFab\\GithubWidget\\Model\\": "src/Model",
+            "FintechFab\\GithubWidget\\Component\\": "src/Component",
+            "FintechFab\\GithubWidget\\Controller\\": "src/Controller",
+            "FintechFab\\GithubWidget\\Command\\": "src/Command"
+        }
+    },
+    "minimum-stability": "stable"
+}

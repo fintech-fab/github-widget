@@ -1,0 +1,36 @@
+<?php
+
+namespace FintechFab\GithubWidget\Model;
+
+
+/**
+ * Interface ModelInterface
+ *
+ * @package FintechFab\Models
+ */
+interface ModelInterface
+{
+	/**
+	 * @return string  Нужно для отображения на экране, с какими данными выполняются операции.
+	 */
+	public function getMyName();
+
+	/**
+	 * Проверка и заполнение данных для сохранения. Возвращает true, если разрешено сохранять (иначе false)
+	 *
+	 * @param $inData
+	 *
+	 * @return bool
+	 */
+	public function dataGitHub($inData);
+
+	/**
+	 * Проверка и заполнение данных для обновления. Возвращает true или false, разрешая обновлять или не разрешая.
+	 *
+	 * @param $inData
+	 *
+	 * @return bool
+	 */
+	public function updateFromGitHub($inData);
+
+}
