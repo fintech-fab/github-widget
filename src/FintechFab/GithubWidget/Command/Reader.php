@@ -2,6 +2,7 @@
 
 namespace FintechFab\GithubWidget\Command;
 
+use DB;
 use Eloquent;
 use FintechFab\GithubWidget\Component\Api;
 use FintechFab\GithubWidget\Model\Comments;
@@ -454,12 +455,12 @@ class Reader extends Command
 		$myName = $item->getMyName();
 		foreach ($inData as $inItem) {
 
-			$keyNames = is_array($keyNames)? $keyNames: array($keyNames);
+			$keyNames = is_array($keyNames) ? $keyNames : array($keyNames);
 			$keyName = $keyNames[0];
 			$item = $classDB::getModel();
 			$inItem->repo = $this->ownerRepo;
 
-			foreach($keyNames as $subKeyName){
+			foreach ($keyNames as $subKeyName) {
 				$item = $item->where($subKeyName, $inItem->$subKeyName);
 			}
 			$item = $item->first();
@@ -468,7 +469,15 @@ class Reader extends Command
 				$this->info("Found $myName:" . $item->$keyName);
 				if ($item->updateFromGitHub($inItem)) {
 					$this->info("Update: " . $item->$keyName);
-					$item->save();
+					if (count($keyNames) > 1) {
+						$db = $item->getConnection()->table($item->getTable());
+						foreach ($keyNames as $subKeyName) {
+							$db = $db->where($subKeyName, $inItem->$subKeyName);
+						}
+						$db->update($item->getAttributes());
+					} else {
+						$item->save();
+					}
 				}
 			} else {
 				$item = new $classDB;
